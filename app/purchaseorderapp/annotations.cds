@@ -1,5 +1,9 @@
 using MyService as service from '../../srv/Service';
+
 annotate service.poheaderset with @(
+
+    UI.SelectionFields:[ poid, vendor ],
+
     UI.FieldGroup #GeneratedGroup : {
         $Type : 'UI.FieldGroupType',
         Data : [
@@ -32,6 +36,10 @@ annotate service.poheaderset with @(
             Label : 'General Information',
             Target : '@UI.FieldGroup#GeneratedGroup',
         },
+                {
+            $Type : 'UI.ReferenceFacet',
+            Target : 'Items/@UI.LineItem#AQUAMAN',
+        },
     ],
     UI.LineItem : [
         {
@@ -55,5 +63,25 @@ annotate service.poheaderset with @(
             Value : createdAt,
         },
     ],
+);
+
+annotate service.poitemset with @(
+    UI.LineItem #AQUAMAN:[
+        {
+            $Type : 'UI.DataField',
+            Value : item,
+            Label: 'item No'
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : price,
+            Label : 'Price',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : quantity, 
+            Label : 'Quantity'
+        },
+    ]
 );
 
